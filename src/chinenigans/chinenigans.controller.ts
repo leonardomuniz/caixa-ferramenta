@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
 import { ChinenigansService } from './chinenigans.service';
 import { CreateChineniganDto } from './dto/create-chinenigan.dto';
 import { UpdateChineniganDto } from './dto/update-chinenigan.dto';
 
 @Controller('chinenigans')
 export class ChinenigansController {
-  constructor(private readonly chinenigansService: ChinenigansService) {}
+  constructor(private readonly chinenigansService: ChinenigansService) { }
 
   @Post()
   create(@Body() createChineniganDto: CreateChineniganDto) {
@@ -13,8 +13,13 @@ export class ChinenigansController {
   }
 
   @Get()
+  @HttpCode(200)
   findAll() {
-    return this.chinenigansService.findAll();
+    const response = this.chinenigansService.findAll();
+    return {
+      payload: response,
+      message: 'Find all handled successfully'
+    };
   }
 
   @Get(':id')
