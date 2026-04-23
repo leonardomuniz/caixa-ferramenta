@@ -1,9 +1,15 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { map, Observable } from "rxjs";
+import { ApiProperty } from '@nestjs/swagger'
 
-export interface Response<T> {
+export class Response<T> {
+    @ApiProperty({ example: true })
     success: boolean
+
+    @ApiProperty()
     data: T
+
+    @ApiProperty({ required: false, example: 'Operation successfull' })
     message?: string
 }
 
