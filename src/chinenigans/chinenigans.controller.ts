@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { ChinenigansService } from './chinenigans.service';
 import { CreateChineniganDto } from './dto/create-chinenigan.dto';
 import { UpdateChineniganDto } from './dto/update-chinenigan.dto';
@@ -17,11 +17,12 @@ export class ChinenigansController {
   @Get()
   @ApiOkAppResponse(CreateChineniganDto)
   findAll() {
-    const response = this.chinenigansService.findAll();
-    return {
-      payload: response,
-      message: 'Find all handled successfully'
-    };
+    // const response = this.chinenigansService.findAll();
+    // return {
+    //  payload: response,
+    //  message: 'Find all handled successfully'
+    //};
+    throw new HttpException('Falha ao pesquisar', HttpStatus.BAD_REQUEST)
   }
 
   @Get(':id')
