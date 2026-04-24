@@ -16,13 +16,12 @@ export class ChinenigansController {
 
   @Get()
   @ApiOkAppResponse(CreateChineniganDto)
-  findAll() {
-    // const response = this.chinenigansService.findAll();
-    // return {
-    //  payload: response,
-    //  message: 'Find all handled successfully'
-    //};
-    throw new HttpException('Falha ao pesquisar', HttpStatus.BAD_REQUEST)
+  async findAll() {
+    const response = await this.chinenigansService.findAll();
+    return {
+      payload: response,
+      message: 'Find all handled successfully'
+    }
   }
 
   @Get(':id')
