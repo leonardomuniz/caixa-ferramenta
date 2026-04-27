@@ -1,12 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ChinenigansService } from './chinenigans.service';
 import { CreateChineniganDto } from './dto/create-chinenigan.dto';
 import { UpdateChineniganDto } from './dto/update-chinenigan.dto';
-import { ApiCreatedAppResponse, ApiOkAppResponse } from 'src/config/SwaggerResponse.decorator';
+import {
+  ApiCreatedAppResponse,
+  ApiOkAppResponse,
+} from 'src/config/SwaggerResponse.decorator';
 
 @Controller('chinenigans')
 export class ChinenigansController {
-  constructor(private readonly chinenigansService: ChinenigansService) { }
+  constructor(private readonly chinenigansService: ChinenigansService) {}
 
   @Post()
   @ApiCreatedAppResponse(CreateChineniganDto)
@@ -20,8 +31,8 @@ export class ChinenigansController {
     const response = await this.chinenigansService.findAll();
     return {
       payload: response,
-      message: 'Find all handled successfully'
-    }
+      message: 'Find all handled successfully',
+    };
   }
 
   @Get(':id')
@@ -30,7 +41,10 @@ export class ChinenigansController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChineniganDto: UpdateChineniganDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateChineniganDto: UpdateChineniganDto,
+  ) {
     return this.chinenigansService.update(+id, updateChineniganDto);
   }
 
